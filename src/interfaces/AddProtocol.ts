@@ -1,4 +1,5 @@
 import Jimp from 'jimp'
+import { ImageOrientation } from './ImageProtocol'
 
 export interface AddCircleProps {
   /** An image to be the circle */
@@ -23,6 +24,8 @@ export interface AddCircleProps {
   ]
   /** The radius to perform the circle */
   radius?: number
+
+  orientation?: Partial<ImageOrientation>
 }
 
 export interface AddRectangleProps {
@@ -42,6 +45,7 @@ export interface AddRectangleProps {
     /** More means closer to the bottom */
     number | 'center'
   ]
+  orientation?: Partial<ImageOrientation>
 
   rotate?: number
 }

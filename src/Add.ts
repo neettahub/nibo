@@ -9,12 +9,7 @@ export class Add implements AddProtocol {
     const [positionX, positionY] = props.position
 
     if (props.image) {
-      const positions = resolvePositions(
-        this.image,
-        props.image,
-        positionX,
-        positionY
-      )
+      const positions = resolvePositions(this.image, props.image, positionX, positionY, props.orientation)
 
       const radius = props.radius ?? (props.image.getWidth() + props.image.getHeight()) / 4
 
@@ -30,7 +25,7 @@ export class Add implements AddProtocol {
       const circleImage = new Jimp(width, height, color)
         .circle({ radius, x: width / 2, y: height / 2 })
 
-      const positions = resolvePositions(this.image, circleImage, positionX, positionY)
+      const positions = resolvePositions(this.image, circleImage, positionX, positionY, props.orientation)
 
       this.image.composite(circleImage, positions.x, positions.y)
     }
@@ -41,9 +36,9 @@ export class Add implements AddProtocol {
       .composite(new Jimp(...props.data), 0, 0)
     if (props.rotate) rectangleImage.rotate(props.rotate ?? 0)
 
-    const resolvedPositions = resolvePositions(this.image, rectangleImage, ...props.position)
+    const positions = resolvePositions(this.image, rectangleImage, ...props.position, props.orientation)
 
-    this.image.composite(rectangleImage, resolvedPositions.x, resolvedPositions.y)
+    this.image.composite(rectangleImage, positions.x, positions.y)
 
     return rectangleImage
   }
