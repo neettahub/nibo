@@ -32,9 +32,20 @@ export class Add implements AddProtocol {
   }
 
   rectangle (props: AddRectangleProps): Jimp {
-    const rectangleImage = new Jimp(props.data[0], props.data[1])
-      .composite(new Jimp(...props.data), 0, 0)
-    if (props.rotate) rectangleImage.rotate(props.rotate ?? 0)
+    const rectangleImage = new Jimp(1, 1)
+    const size = [props.data[0], props.data[1]]
+
+    if (props.image) {
+      rectangleImage
+        .resize(size[0], size[1])
+        .composite(props.image.resize(size[0], size[1]), 0, 0)
+    } else if (props.data) {
+      rectangleImage
+        .resize(size[0], size[1])
+        .composite(new Jimp(...props.data), 0, 0)
+    }
+
+    if (props.rotate) rectangleImage.rotate(props.rotate)
 
     const positions = resolvePositions(this.image, rectangleImage, ...props.position, props.orientation)
 

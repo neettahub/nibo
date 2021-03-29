@@ -29,13 +29,16 @@ export interface AddCircleProps {
 }
 
 export interface AddRectangleProps {
+  /** Data property will be ignored */
+  image?: Jimp
+
   data: [
     /** Width */
     number,
     /** Height */
     number,
     /** Color */
-    string
+    string?
   ]
 
   /** The position X, Y (based on the main image) */
