@@ -6,13 +6,13 @@ export interface AddCircleProps {
   image?: Jimp
 
   /** If you didn't provide an image, you must create one within this props */
-  data?: [
+  data: [
     /** Width */
     number,
     /** Height */
     number,
     /** Color */
-    string
+    string?
   ]
 
   /** The position X, Y (based on the main image) */
