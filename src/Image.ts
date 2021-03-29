@@ -1,9 +1,10 @@
 import Jimp from 'jimp'
 import { Add } from './Add'
 import { AddProtocol } from './interfaces/AddProtocol'
-import { ImageConstructorProps } from './interfaces/ImageProtocol'
+import { ImageConstructorProps, ImageCreateProps, ImageProtocol } from './interfaces/ImageProtocol'
+import { ImageElement } from './structures/Elements/Image'
 
-export class Image {
+export class Image implements ImageProtocol {
   private _image!: Jimp
   public add!: AddProtocol
 
@@ -18,8 +19,10 @@ export class Image {
     return this._image
   }
 
-  static create (width: number, height: number, color: string) {
-    const image = new Jimp(width, height, Jimp.cssColorToHex(color))
+  static create (data: ImageCreateProps) {
+    const image = data instanceof ImageElement
+      ? new Jimp(data.width, data.height, data.color)
+      : data
 
     return new Image({
       image,

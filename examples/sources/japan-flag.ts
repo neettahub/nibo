@@ -1,6 +1,7 @@
 import { Image } from '../..'
+import { ImageElement } from '../../src/structures/Elements/Image'
 
-const image = Image.create(500, 300, 'WHITE')
+const image = Image.create(new ImageElement(500, 300, 'WHITE'))
 
 image.add.circle({
   data: [150, 150, 'RED'],

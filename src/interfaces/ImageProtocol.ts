@@ -1,4 +1,5 @@
 import Jimp from 'jimp'
+import { ImageElement } from '../structures/Elements/Image'
 import { AddProtocol } from './AddProtocol'
 
 export type ImageOrientation = [
@@ -11,6 +12,8 @@ export interface ImageConstructorProps {
   add: AddProtocol
 }
 
+export type ImageCreateProps = Jimp | ImageElement
+
 export interface ImageProtocol {
-  image: Jimp
+  value: Jimp
 }
