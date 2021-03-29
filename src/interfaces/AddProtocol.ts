@@ -1,5 +1,5 @@
 import Jimp from 'jimp'
-import { ImageOrientation } from './ImageProtocol'
+import { ImageOrientation, ReturnImageInformation } from './ImageProtocol'
 
 export interface AddCircleProps {
   /** An image to be the circle */
@@ -54,6 +54,6 @@ export interface AddRectangleProps {
 }
 
 export interface AddProtocol {
-  circle(props: AddCircleProps): void
-  rectangle(props: AddRectangleProps): Jimp
+  circle(props: AddCircleProps): ReturnImageInformation
+  rectangle(props: AddRectangleProps): ReturnImageInformation
 }

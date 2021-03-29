@@ -1,11 +1,14 @@
 import Jimp from 'jimp'
+import { Image } from './Image'
 import { AddCircleProps, AddProtocol, AddRectangleProps } from './interfaces/AddProtocol'
+import { ReturnImageInformation } from './interfaces/ImageProtocol'
+import { ImageElement } from './structures/Elements/Image'
 import { resolvePositions } from './utils/resolvePositions'
 
 export class Add implements AddProtocol {
   private constructor (private image: Jimp) {}
 
-  circle (props: AddCircleProps): void {
+  circle (props: AddCircleProps): ReturnImageInformation {
     const [positionX, positionY] = props.position
     const [width, height, color] = props.data
 
@@ -19,14 +22,24 @@ export class Add implements AddProtocol {
       imageCirculated.composite(props.image.resize(width, height), 0, 0)
     }
 
+    const copy = this.image.clone()
+
     this.image.composite(
       imageCirculated.circle({ radius, x: width / 2, y: height / 2 }),
       resolvedPositions.x,
       resolvedPositions.y
     )
+
+    return {
+      width,
+      height,
+      oldImage: copy,
+      newImage: this.image.clone(),
+      createdImage: Image.create(new ImageElement(width, height, color))
+    }
   }
 
-  rectangle (props: AddRectangleProps): Jimp {
+  rectangle (props: AddRectangleProps): ReturnImageInformation {
     const rectangleImage = new Jimp(1, 1)
 
     const [width, height, color] = props.data
@@ -52,9 +65,17 @@ export class Add implements AddProtocol {
       props.orientation
     )
 
+    const copy = this.image.clone()
+
     this.image.composite(rectangleImage, resolvedPositions.x, resolvedPositions.y)
 
-    return rectangleImage
+    return {
+      width,
+      height,
+      oldImage: copy,
+      newImage: this.image.clone(),
+      createdImage: Image.create(new ImageElement(width, height, color))
+    }
   }
 
   static create (image: Jimp): Add {
