@@ -2,7 +2,7 @@ import Jimp from 'jimp'
 import { Add } from './Add'
 import { AddProtocol } from './interfaces/AddProtocol'
 import { ImageConstructorProps, ImageCreateProps, ImageProtocol } from './interfaces/ImageProtocol'
-import { ImageElement } from './structures/Elements/Image'
+import { Image as ImageElement } from './structures/Elements/Image'
 
 export class Image implements ImageProtocol {
   private _image!: Jimp

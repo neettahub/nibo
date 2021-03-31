@@ -2,7 +2,7 @@ import Jimp from 'jimp'
 import { Image } from './Image'
 import { AddCircleProps, AddProtocol, AddRectangleProps } from './interfaces/AddProtocol'
 import { ReturnImageInformation } from './interfaces/ImageProtocol'
-import { ImageElement } from './structures/Elements/Image'
+import { Image as ImageElement } from './structures/Elements/Image'
 import { resolvePositions } from './utils/resolvePositions'
 
 export class Add implements AddProtocol {
@@ -35,7 +35,7 @@ export class Add implements AddProtocol {
       height,
       oldImage: copy,
       newImage: this.image.clone(),
-      createdImage: Image.create(new ImageElement(width, height, color))
+      createdImage: Image.create(ImageElement.create(width, height, color))
     }
   }
 
@@ -74,7 +74,7 @@ export class Add implements AddProtocol {
       height,
       oldImage: copy,
       newImage: this.image.clone(),
-      createdImage: Image.create(new ImageElement(width, height, color))
+      createdImage: Image.create(ImageElement.create(width, height, color))
     }
   }
 
