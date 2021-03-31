@@ -2,9 +2,10 @@
   "name": "nibo",
   "version": "1.2.0",
   "description": "Be an artist by coding",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "keywords": [],
-  "author": "",
+  "author": "fagnersales",
   "license": "ISC",
   "dependencies": {
     "jimp": "^0.16.1"
