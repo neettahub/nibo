@@ -16,6 +16,17 @@ export interface ReturnImageInformation {
   createdImage: Image
 }
 
+export interface ReturnTextInformation {
+  x: number
+  y: number
+  width: number
+  height: number
+  text: string
+  fontFilePath: string
+  oldImage: Jimp
+  newImage: Jimp
+}
+
 export interface ImageConstructorProps {
   image: Jimp
   add: AddProtocol

@@ -53,7 +53,27 @@ export interface AddRectangleProps {
   rotate?: number
 }
 
+export interface AddTextProps {
+  value: string
+  fontFilePath: string
+
+  /** The position X, Y (based on the main image) */
+  position: [
+  /** By default more means closer to the right border */
+  number | 'center',
+  /** By default more means closer to the bottom border */
+  number | 'center'
+  ]
+
+  fontSize: number
+
+  widthToBreakLine?: number
+
+  orientation?: Partial<ImageOrientation>
+}
+
 export interface AddProtocol {
   circle(props: AddCircleProps): ReturnImageInformation
   rectangle(props: AddRectangleProps): ReturnImageInformation
+  text(props: AddTextProps): Promise<ReturnImageInformation>
 }

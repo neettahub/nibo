@@ -1,7 +1,7 @@
 import Jimp from 'jimp'
 import { Image } from './Image'
-import { AddCircleProps, AddProtocol, AddRectangleProps } from './interfaces/AddProtocol'
-import { ReturnImageInformation } from './interfaces/ImageProtocol'
+import { AddCircleProps, AddProtocol, AddRectangleProps, AddTextProps } from './interfaces/AddProtocol'
+import { ReturnImageInformation, ReturnTextInformation } from './interfaces/ImageProtocol'
 import { Image as ImageElement } from './structures/Elements/Image'
 import { resolvePositions } from './utils/resolvePositions'
 
@@ -75,6 +75,39 @@ export class Add implements AddProtocol {
       oldImage: copy,
       newImage: this.image.clone(),
       createdImage: Image.create(ImageElement.create(width, height, color))
+    }
+  }
+
+  async text (props: AddTextProps): Promise<ReturnTextInformation> {
+    const font = await Jimp.loadFont(props.fontFilePath)
+    if (!font) throw new Error('font not found')
+
+    const width = Jimp.measureText(font, props.value)
+    const height = Jimp.measureTextHeight(font, props.value, width)
+
+    const image = new Jimp(width, height)
+      .print(font, 0, 0, props.value)
+      .resize(props.fontSize, Jimp.AUTO)
+
+    const resolvedPositions = resolvePositions(
+      this.image,
+      image,
+      ...props.position,
+      props.orientation
+    )
+
+    const copy = this.image.clone()
+
+    this.image.composite(image, resolvedPositions.x, resolvedPositions.y)
+
+    return {
+      width,
+      height,
+      oldImage: copy,
+      newImage: this.image.clone(),
+      text: props.value,
+      fontFilePath: props.fontFilePath,
+      ...resolvedPositions
     }
   }
 
