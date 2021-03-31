@@ -4,7 +4,7 @@ import { ImageOrientation } from '../interfaces/ImageProtocol'
 export const resolvePositions = (mainImage: Jimp, targetImage: Jimp, x: string | number, y: string | number, orientation?: Partial<ImageOrientation>) => {
   const positions = { x: 0, y: 0 }
 
-  const [orientationX = 'left', orientationY = 'bottom'] = orientation ?? []
+  const [orientationX = 'left', orientationY = 'top'] = orientation ?? []
 
   if (typeof x === 'number') {
     if (orientationX === 'left') {
