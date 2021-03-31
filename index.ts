@@ -1,2 +1,8 @@
-export { Image } from './src/Image'
-export * as Elements from './src/structures/Elements'
+import { Image } from './src/Image'
+import { Image as ImageElement } from './src/structures/Elements/Image'
+
+export const Elements = {
+  Image: ImageElement
+}
+
+export { Image }

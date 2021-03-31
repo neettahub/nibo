@@ -1,6 +1,6 @@
 import Jimp from 'jimp'
 import { Image } from '../Image'
-import { ImageElement } from '../structures/Elements/Image'
+import { Image as ImageElement } from '../structures/Elements/Image'
 import { AddProtocol } from './AddProtocol'
 
 export type ImageOrientation = [
