@@ -95,7 +95,11 @@ export class Add implements AddProtocol {
     if (!font) throw new Error('font not found')
 
     const width = Jimp.measureText(font, props.value)
-    const height = Jimp.measureTextHeight(font, props.value, width)
+    const measuredHeight = Jimp.measureTextHeight(font, props.value, width)
+
+    const height = props.value.split(' ').length > 1
+      ? measuredHeight / 2
+      : measuredHeight
 
     const image = new Jimp(width, height)
       .print(font, 0, 0, props.value)
