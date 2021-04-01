@@ -19,8 +19,8 @@ export class Image implements ImageProtocol {
     return this._image
   }
 
-  async save (path: string): Promise<Jimp> {
-    this._image.writeAsync(path)
+  save (path: string): Promise<Jimp> {
+    return this._image.writeAsync(path)
   }
 
   static create (data: ImageCreateProps) {
