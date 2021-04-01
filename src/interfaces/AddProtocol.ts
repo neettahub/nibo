@@ -1,5 +1,5 @@
 import Jimp from 'jimp'
-import { ImageOrientation, ReturnImageInformation } from './ImageProtocol'
+import { ImageOrientation, ReturnImageInformation, ReturnTextInformation } from './ImageProtocol'
 
 export interface AddCircleProps {
   /** An image to be the circle */
@@ -75,5 +75,5 @@ export interface AddTextProps {
 export interface AddProtocol {
   circle(props: AddCircleProps): ReturnImageInformation
   rectangle(props: AddRectangleProps): ReturnImageInformation
-  text(props: AddTextProps): Promise<ReturnImageInformation>
+  text(props: AddTextProps): Promise<ReturnTextInformation>
 }
