@@ -6,12 +6,14 @@ import { Image as ImageElement } from './structures/Elements/Image'
 
 export class Image implements ImageProtocol {
   private _image!: Jimp
+  private promises!: Set<Promise<any>>
   public add!: AddProtocol
 
   constructor (data: ImageConstructorProps) {
     Object.assign(this, {
       _image: data.image,
-      add: data.add
+      add: data.add,
+      promises: data.promises
     })
   }
 
@@ -23,14 +25,21 @@ export class Image implements ImageProtocol {
     return this._image.writeAsync(path)
   }
 
+  async saveAfterPromises (path: string): Promise<Jimp> {
+    return Promise.all([...this.promises]).then(() => this.save(path))
+  }
+
   static create (data: ImageCreateProps) {
     const image = data instanceof ImageElement
       ? new Jimp(data.width, data.height, data.color)
       : data
 
+    const promises = new Set<Promise<any>>()
+
     return new Image({
       image,
-      add: Add.create(image)
+      promises,
+      add: Add.create(image, promises)
     })
   }
 }

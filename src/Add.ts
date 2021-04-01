@@ -6,7 +6,10 @@ import { Image as ImageElement } from './structures/Elements/Image'
 import { resolvePositions } from './utils/resolvePositions'
 
 export class Add implements AddProtocol {
-  private constructor (private image: Jimp) {}
+  private constructor (
+    private image: Jimp,
+    private promises: Set<Promise<any>>
+  ) {}
 
   circle (props: AddCircleProps): ReturnImageInformation {
     const [positionX, positionY] = props.position
@@ -85,7 +88,10 @@ export class Add implements AddProtocol {
   }
 
   async text (props: AddTextProps): Promise<ReturnTextInformation> {
-    const font = await Jimp.loadFont(props.fontFilePath)
+    const fontPromise = Jimp.loadFont(props.fontFilePath)
+    this.promises.add(fontPromise)
+
+    const font = await fontPromise
     if (!font) throw new Error('font not found')
 
     const width = Jimp.measureText(font, props.value)
@@ -118,7 +124,7 @@ export class Add implements AddProtocol {
     }
   }
 
-  static create (image: Jimp): Add {
-    return new Add(image)
+  static create (image: Jimp, promises: Set<Promise<any>>): Add {
+    return new Add(image, promises)
   }
 }

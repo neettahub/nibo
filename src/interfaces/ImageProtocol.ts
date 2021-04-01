@@ -29,6 +29,7 @@ export interface ReturnTextInformation {
 
 export interface ImageConstructorProps {
   image: Jimp
+  promises: Set<Promise<any>>
   add: AddProtocol
 }
 
@@ -37,4 +38,5 @@ export type ImageCreateProps = Jimp | ImageElement
 export interface ImageProtocol {
   value: Jimp
   save: (path: string) => Promise<Jimp>
+  saveAfterPromises: (path: string) => Promise<Jimp>
 }
