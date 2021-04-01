@@ -16,7 +16,13 @@ export class Add implements AddProtocol {
 
     const imageCirculated = new Jimp(width, height, color)
 
-    const resolvedPositions = resolvePositions(this.image, imageCirculated, positionX, positionY, props.orientation)
+    const resolvedPositions = resolvePositions(
+      this.image,
+      imageCirculated,
+      positionX || 0,
+      positionY || 0,
+      props.orientation
+    )
 
     if (props.image) {
       imageCirculated.composite(props.image.resize(width, height), 0, 0)
@@ -60,8 +66,8 @@ export class Add implements AddProtocol {
     const resolvedPositions = resolvePositions(
       this.image,
       rectangleImage,
-      positionX,
-      positionY,
+      positionX || 0,
+      positionY || 0,
       props.orientation
     )
 
@@ -92,7 +98,8 @@ export class Add implements AddProtocol {
     const resolvedPositions = resolvePositions(
       this.image,
       image,
-      ...props.position,
+      props.position[0] || 0,
+      props.position[1] || 0,
       props.orientation
     )
 
