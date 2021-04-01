@@ -19,6 +19,10 @@ export class Image implements ImageProtocol {
     return this._image
   }
 
+  async save (path: string): Promise<Jimp> {
+    this._image.writeAsync(path)
+  }
+
   static create (data: ImageCreateProps) {
     const image = data instanceof ImageElement
       ? new Jimp(data.width, data.height, data.color)

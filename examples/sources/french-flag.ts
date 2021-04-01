@@ -13,7 +13,7 @@ image.add.rectangle({
   position: [400, 'center']
 })
 
-image.value.writeAsync('./examples/images/french-flag.example.1.png')
+image.save('./examples/images/french-flag.example.1.png')
 
 // USING ORIENTATION
 
@@ -31,4 +31,4 @@ image2.add.rectangle({
   orientation: ['right']
 })
 
-image2.value.writeAsync('./examples/images/french-flag.example.2.png')
+image2.save('./examples/images/french-flag.example.2.png')

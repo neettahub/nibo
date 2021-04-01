@@ -11,5 +11,5 @@ image.add.text({
   position: ['center', 'center'],
   fontSize: 400
 }).then(() => {
-  image.value.writeAsync('./examples/images/fagner-text.example.1.png')
+  image.save('./examples/images/fagner-text.example.1.png')
 })

@@ -8,4 +8,4 @@ image.add.circle({
   position: ['center', 'center']
 })
 
-image.value.writeAsync('./examples/images/japan-flag.example.1.png')
+image.save('./examples/images/japan-flag.example.1.png')

@@ -36,4 +36,5 @@ export type ImageCreateProps = Jimp | ImageElement
 
 export interface ImageProtocol {
   value: Jimp
+  save: (path: string) => Promise<Jimp>
 }
